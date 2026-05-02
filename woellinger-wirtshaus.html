@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wöllinger Wirtshaus | München – Sendling</title>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue:       #1B3A6B;
+    --blue-mid:   #24508A;
+    --blue-light: #3D6FAA;
+    --white:      #FDFAF4;
+    --cream:      #F4EDD8;
+    --cream-mid:  #E8D9B8;
+    --cream-dark: #D9C89A;
+    --gold:       #B8902A;
+    --gold-light: #D4AA44;
+    --red:        #8B1A1A;
+    --text:       #1A1206;
+    --text-muted: #5C4A1E;
+    --border:     rgba(184,144,42,0.3);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── DECORATIVE RHOMBUS PATTERN ── */
+  .diamond-border {
+    height: 18px;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        var(--blue) 0px, var(--blue) 6px,
+        var(--cream) 6px, var(--cream) 9px,
+        var(--gold) 9px, var(--gold) 12px,
+        var(--cream) 12px, var(--cream) 18px
+      );
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    background: var(--blue);
+    border-bottom: 3px solid var(--gold);
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+  }
+
+  .nav-logo {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1.6rem;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  .nav-links { display:flex; gap:1.8rem; list-style:none; }
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 300;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  .nav-fb {
+    display: flex; align-items: center; gap: 0.45rem;
+    color: var(--cream); text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 0.1em;
+    border: 1px solid rgba(212,170,68,0.45);
+    padding: 0.3rem 0.85rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .nav-fb:hover { border-color: var(--gold); color: var(--gold-light); }
+  .nav-fb svg { width:14px; height:14px; fill:currentColor; flex-shrink:0; }
+
+  /* Hamburger */
+  .hamburger {
+    display:none; flex-direction:column; gap:5px;
+    background:none; border:none; cursor:pointer; padding:4px;
+  }
+  .hamburger span { display:block; width:24px; height:2px; background:var(--gold); transition:all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display:none; position:fixed; top:60px; left:0; right:0;
+    background: var(--blue); z-index:99;
+    padding:2rem; flex-direction:column; gap:1.4rem;
+    border-bottom: 2px solid var(--gold);
+  }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { color:var(--cream); text-decoration:none; font-size:1.05rem; letter-spacing:0.08em; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(to bottom, rgba(27,58,107,0.6) 0%, rgba(27,58,107,0.2) 45%, rgba(27,58,107,0.72) 100%),
+      url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=80') center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 5rem;
+    position: relative;
+  }
+
+  /* Decorative corner frame */
+  .hero::before, .hero::after {
+    content: '';
+    position: absolute;
+    width: 90px; height: 90px;
+    border: 2px solid rgba(212,170,68,0.55);
+  }
+  .hero::before { top:84px; left:36px; border-right:none; border-bottom:none; }
+  .hero::after  { bottom:36px; right:36px; border-left:none; border-top:none; }
+
+  .hero-content { position:relative; z-index:1; max-width:780px; }
+
+  .hero-wappen {
+    font-size:3rem;
+    display:block;
+    margin-bottom:0.6rem;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    border-top: 1px solid var(--gold-light);
+    border-bottom: 1px solid var(--gold-light);
+    color: var(--gold-light);
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    padding: 0.3rem 1.5rem;
+    margin-bottom: 1.2rem;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    color: var(--white);
+    line-height: 1.0;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.45);
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    color: var(--cream-mid);
+    margin-bottom: 0.6rem;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+    color: rgba(253,250,244,0.78);
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+
+  .hero-actions {
+    display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+    animation: fadeUp 0.7s 0.5s ease both;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: var(--cream);
+    border: 2px solid var(--gold);
+    padding: 0.8rem 2rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold); color: var(--blue); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid rgba(253,250,244,0.45);
+    padding: 0.8rem 2rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+  .scroll-indicator {
+    position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:0.5rem;
+    color:rgba(253,250,244,0.45);
+    font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase;
+    animation: bounce 2.2s infinite;
+  }
+  .scroll-line { width:1px; height:36px; background:linear-gradient(to bottom,rgba(184,144,42,0.6),transparent); }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(22px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes bounce {
+    0%,100% { transform:translateX(-50%) translateY(0); }
+    50%      { transform:translateX(-50%) translateY(6px); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    font-family: 'Source Serif 4', serif;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .section-title {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    color: var(--blue);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-title em {
+    font-style:normal;
+    color: var(--gold);
+    font-family: 'UnifrakturMaguntia', cursive;
+  }
+
+  .section-text {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .ornament {
+    text-align:center;
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.4em;
+    opacity: 0.55;
+    margin: 0.5rem 0;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--white); }
+
+  .about-inner {
+    max-width: 1100px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
+  }
+
+  .about-img { position:relative; }
+  .about-img img { width:100%; height:430px; object-fit:cover; display:block; }
+  .about-img::before {
+    content:'';
+    position:absolute; top:-10px; left:-10px;
+    width:60px; height:60px;
+    border-top: 3px solid var(--gold);
+    border-left: 3px solid var(--gold);
+    z-index:1;
+  }
+  .about-img::after {
+    content:'';
+    position:absolute; bottom:-10px; right:-10px;
+    width:60px; height:60px;
+    border-bottom: 3px solid var(--gold);
+    border-right: 3px solid var(--gold);
+  }
+
+  .about-text .section-text { max-width:100%; margin-bottom:1rem; }
+
+  .about-stats {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem;
+  }
+
+  .stat {
+    text-align:center;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: 1rem 0.5rem;
+  }
+
+  .stat-num {
+    display:block;
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 2rem;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  /* ── SPEISEKARTE ── */
+  .menu-section { background: var(--blue); }
+  .menu-section .section-title { color: var(--cream); }
+  .menu-section .section-label { color: var(--gold-light); }
+  .menu-section .section-text { color: rgba(253,250,244,0.65); }
+  .menu-section .ornament { color: var(--gold-light); }
+
+  .menu-inner { max-width:1100px; margin:0 auto; }
+
+  .menu-header {
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:3rem; flex-wrap:wrap; gap:1.5rem;
+  }
+
+  .menu-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap:1px;
+    background: rgba(184,144,42,0.2);
+  }
+
+  .menu-card {
+    background: rgba(27,58,107,0.85);
+    padding: 1.8rem 2rem;
+    border-left: 3px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+  .menu-card:hover {
+    background: rgba(36,80,138,0.9);
+    border-left-color: var(--gold);
+  }
+
+  .menu-icon { font-size:1.6rem; display:block; margin-bottom:0.6rem; }
+
+  .menu-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+
+  .menu-card p {
+    font-size:0.95rem; font-weight:300;
+    color:rgba(253,250,244,0.62); line-height:1.65;
+  }
+
+  .menu-card .price {
+    display:block; margin-top:0.9rem;
+    color: var(--gold-light); font-size:0.88rem; letter-spacing:0.04em;
+    font-style:italic;
+  }
+
+  /* ── FEATURES ── */
+  .features { background: var(--cream); }
+  .features-inner { max-width:1100px; margin:0 auto; }
+  .features-header { text-align:center; margin-bottom:3rem; }
+  .features-header .section-label { display:block; text-align:center; }
+
+  .features-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap:1.5rem;
+  }
+
+  .feature-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--blue);
+    padding: 1.75rem 1.5rem;
+    text-align:center;
+  }
+
+  .feature-icon { font-size:2rem; display:block; margin-bottom:0.75rem; }
+
+  .feature-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    color: var(--blue);
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+
+  .feature-card p {
+    font-size:0.9rem; color:var(--text-muted); font-weight:300; line-height:1.65;
+  }
+
+  /* ── ÖFFNUNGSZEITEN ── */
+  .hours { background: var(--white); }
+  .hours-inner {
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;
+  }
+
+  .hours-table { width:100%; }
+
+  .hours-row {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0.7rem 0;
+    border-bottom: 1px solid rgba(184,144,42,0.15);
+  }
+  .hours-row:last-child { border-bottom:none; }
+  .day { font-weight:400; color:var(--text); }
+  .time { color:var(--blue-mid); font-style:italic; font-weight:300; }
+  .today { background:rgba(27,58,107,0.06); margin:0 -0.5rem; padding:0.7rem 0.5rem; }
+
+  .mittagstisch {
+    margin-top:1.5rem;
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.25rem;
+  }
+  .mittagstisch h4 {
+    font-family:'Lora',serif;
+    font-size:0.95rem; color:var(--blue); margin-bottom:0.3rem; font-weight:600;
+  }
+  .mittagstisch p { font-size:0.88rem; color:var(--text-muted); font-weight:300; }
+
+  .brunch-box {
+    margin-top:1rem;
+    background: var(--cream);
+    border-left: 4px solid var(--red);
+    padding: 1rem 1.25rem;
+  }
+  .brunch-box h4 { font-family:'Lora',serif; font-size:0.95rem; color:var(--red); margin-bottom:0.3rem; font-weight:600; }
+  .brunch-box p { font-size:0.88rem; color:var(--text-muted); font-weight:300; }
+
+  /* ── BEWERTUNGEN ── */
+  .reviews { background: var(--cream); }
+  .reviews-inner { max-width:1100px; margin:0 auto; }
+  .reviews-header { margin-bottom:2.5rem; }
+
+  .rating-badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background: var(--blue);
+    color: var(--cream);
+    padding: 0.35rem 1rem;
+    font-size:0.82rem; letter-spacing:0.12em; margin-bottom:1.5rem;
+  }
+
+  .reviews-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap:1.5rem;
+  }
+
+  .review-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    position:relative;
+  }
+
+  .review-card::before {
+    content: '❝';
+    position:absolute; top:1rem; right:1.2rem;
+    font-size:2.5rem; color:var(--cream-dark);
+    font-family:serif; line-height:1;
+  }
+
+  .review-stars { color:var(--gold); font-size:0.85rem; margin-bottom:0.65rem; }
+
+  .review-text {
+    font-style:italic; font-size:0.98rem;
+    color:var(--text-muted); font-weight:300;
+    line-height:1.75; margin-bottom:1rem;
+  }
+
+  .review-author {
+    font-size:0.75rem; letter-spacing:0.15em;
+    text-transform:uppercase; color:var(--blue-mid); font-weight:400;
+  }
+
+  /* ── RESERVIERUNG ── */
+  .reservation { background: var(--blue); }
+  .reservation-inner { max-width:780px; margin:0 auto; text-align:center; }
+  .reservation .section-title { color:var(--cream); }
+  .reservation .section-label { color:var(--gold-light); }
+  .reservation .section-text { color:rgba(253,250,244,0.65); margin:0 auto 2.5rem; }
+
+  .res-form {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:1rem; text-align:left; margin-bottom:1rem;
+  }
+  .res-form .full { grid-column: 1/-1; }
+
+  .form-group label {
+    display:block;
+    font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase;
+    color:rgba(253,250,244,0.5); margin-bottom:0.35rem; font-weight:300;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width:100%; background:rgba(253,250,244,0.1);
+    border: 1px solid rgba(184,144,42,0.35);
+    padding: 0.7rem 0.9rem;
+    font-family:'Source Serif 4', serif; font-size:0.95rem;
+    color: var(--white); outline:none;
+    transition: border-color 0.2s;
+    appearance:none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color:rgba(253,250,244,0.3); }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--gold); }
+
+  .form-group select option { background: var(--blue); color: var(--white); }
+  .form-group textarea { resize:vertical; min-height:85px; }
+
+  .form-note {
+    font-size:0.85rem; color:rgba(253,250,244,0.45); font-weight:300; margin-top:0.8rem;
+  }
+  .form-note a { color:var(--gold-light); text-decoration:none; }
+
+  .success-msg {
+    display:none; background:rgba(253,250,244,0.08);
+    border: 1px solid rgba(184,144,42,0.4);
+    padding:1.5rem 2rem; text-align:center; margin-top:1rem;
+  }
+  .success-msg h4 { font-family:'Lora',serif; color:var(--gold-light); font-size:1.15rem; margin-bottom:0.4rem; }
+  .success-msg p { font-size:0.92rem; color:rgba(253,250,244,0.6); font-weight:300; }
+
+  /* ── MAP ── */
+  .map-section { padding:0; }
+  .map-section iframe { width:100%; height:420px; border:none; display:block; }
+
+  /* ── KONTAKT ── */
+  .contact { background: var(--cream); }
+  .contact-inner {
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;
+  }
+
+  .contact-items { margin-top:1.5rem; display:flex; flex-direction:column; gap:1.4rem; }
+
+  .contact-item { display:flex; gap:1rem; align-items:flex-start; }
+
+  .contact-icon {
+    width:42px; height:42px; flex-shrink:0;
+    background: var(--blue);
+    color: var(--gold-light);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem;
+  }
+
+  .contact-item-text strong {
+    display:block; font-size:0.7rem; letter-spacing:0.2em;
+    text-transform:uppercase; color:var(--text-muted); font-weight:400; margin-bottom:0.2rem;
+  }
+
+  .contact-item-text a { color:var(--blue); text-decoration:none; transition:color 0.2s; }
+  .contact-item-text a:hover { color:var(--gold); }
+
+  .fb-link {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background: var(--blue); color: var(--white);
+    padding: 0.65rem 1.4rem;
+    text-decoration:none; font-size:0.82rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    margin-top:1.5rem;
+    transition: background 0.2s;
+    border: 2px solid var(--gold);
+  }
+  .fb-link:hover { background: var(--gold); color: var(--blue); }
+  .fb-link svg { width:16px; height:16px; fill:currentColor; }
+
+  .contact-img img { width:100%; height:360px; object-fit:cover; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--blue);
+    border-top: 3px solid var(--gold);
+    color:rgba(253,250,244,0.5);
+    text-align:center;
+    padding:2rem 1rem;
+    font-size:0.83rem; font-weight:300; letter-spacing:0.06em;
+  }
+
+  footer .footer-logo {
+    font-family:'UnifrakturMaguntia',cursive;
+    font-size:1.8rem; color:var(--gold);
+    display:block; margin-bottom:0.5rem;
+  }
+
+  footer a { color:var(--gold-light); text-decoration:none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links, .nav-fb { display:none; }
+    .hamburger { display:flex; }
+
+    .about-inner,
+    .hours-inner,
+    .contact-inner { grid-template-columns:1fr; gap:2.5rem; }
+
+    .about-img::before, .about-img::after { display:none; }
+    .about-stats { grid-template-columns:repeat(3,1fr); }
+    .res-form { grid-template-columns:1fr; }
+    .res-form .full { grid-column:1; }
+    .contact-img { display:none; }
+    .hero::before, .hero::after { display:none; }
+
+    section { padding:3.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- DIAMOND TOP BORDER -->
+<div class="diamond-border" style="position:fixed;top:60px;left:0;right:0;z-index:99;opacity:0.85;"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Wöllinger</a>
+  <ul class="nav-links">
+    <li><a href="#about">Wirtshaus</a></li>
+    <li><a href="#menu">Speisekarte</a></li>
+    <li><a href="#hours">Öffnungszeiten</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+  <a href="https://www.facebook.com/woellinger/" target="_blank" class="nav-fb" aria-label="Facebook">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    Facebook
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">Wirtshaus</a>
+  <a href="#menu" onclick="closeMobile()">Speisekarte</a>
+  <a href="#hours" onclick="closeMobile()">Öffnungszeiten</a>
+  <a href="#reservation" onclick="closeMobile()">Reservieren</a>
+  <a href="#contact" onclick="closeMobile()">Kontakt</a>
+  <a href="https://www.facebook.com/woellinger/" target="_blank">Facebook →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="hero-wappen">🏰</span>
+    <span class="hero-badge">✦ Echtes Münchner Wirtshaus seit Jahrzehnten ✦</span>
+    <h1>Wöllinger</h1>
+    <p class="hero-sub">Wirtshaus &amp; Biergarten · Sendling, München</p>
+    <p class="hero-tagline">Frisch gezapftes Ayinger Bier · Bayerische Schmankerl · Gemütlicher Biergarten</p>
+    <div class="hero-actions">
+      <a href="#reservation" class="btn-primary">Tisch reservieren</a>
+      <a href="#menu" class="btn-ghost">Speisekarte</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Grüß Gott</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1567529684892-09290a1b2d05?w=800&q=80" alt="Bayerisches Wirtshaus" loading="lazy">
+    </div>
+    <div class="about-text">
+      <span class="section-label">Unser Wirtshaus</span>
+      <h2 class="section-title">Grüß Gott im <em>Wöllinger!</em></h2>
+      <div class="ornament">⸻ ✦ ⸻</div>
+      <p class="section-text">Über Jahrzehnte ist der Wöllinger das Wirtshaus Sendlings – und nach seinem gelungenen Comeback besser denn je. Viel Holz, eine klassisch bayerische Einrichtung und ein großzügiger Biergarten mit bis zu 200 Sitzplätzen schaffen eine Atmosphäre, in der man sich sofort wohlfühlt.</p>
+      <p class="section-text" style="margin-top:1rem;">Vom kräftigen Schweinebraten bis zum saftigen Riesenschnitzel – frisch gekocht, herzlich serviert und zu fairen Preisen. Dazu frisch gezapftes Ayinger Bier vom Fass und Cocktails ab 4,90 €.</p>
+      <div class="about-stats">
+        <div class="stat">
+          <span class="stat-num">4.4</span>
+          <span class="stat-label">Google Sterne</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">200+</span>
+          <span class="stat-label">Biergarten-Plätze</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">tägl.</span>
+          <span class="stat-label">Frisch gekocht</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEISEKARTE -->
+<section class="menu-section" id="menu">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <div>
+        <span class="section-label">Unsere Schmankerl</span>
+        <h2 class="section-title">Die <em>Speisekarte</em></h2>
+        <p class="section-text" style="max-width:500px;">Deftige bayerische Küche mit ausgewählten Klassikern – Mittagsmenüs Mo–Fr, Brunch Sa &amp; So</p>
+      </div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <span class="menu-icon">🥣</span>
+        <h3>Rinderkraftbrühe</h3>
+        <p>Mit Pfannkuchenstreifen oder Brät­knödeln und Leber­spätzle – ein echter bayerischer Klassiker zur Einstimmung.</p>
+        <span class="price">ab 5,90 €</span>
+      </div>
+      <div class="menu-card">
+        <span class="menu-icon">🧀</span>
+        <h3>Obazda mit Brot</h3>
+        <p>Hausgemachter Camembert-Käse-Aufstrich nach Münchner Art – der perfekte Begleiter zum Weißbier.</p>
+        <span class="price">8,40 €</span>
+      </div>
+      <div class="menu-card">
+        <span class="menu-icon">🥩</span>
+        <h3>Schweinekrustenbraten</h3>
+        <p>Saftig geschmorter Braten mit knuspriger Kruste, Semmelknödel und Krautsalat. Beliebtestes Gericht auf Uber Eats!</p>
+        <span class="price">19,90 €</span>
+      </div>
+      <div class="menu-card">
+        <span class="menu-icon">🍖</span>
+        <h3>Riesen-Schweineschnitzel</h3>
+        <p>Das Riesenschnitzel aus Schwäbisch-Hällischem Landschwein – hausgemacht, klassisch und satt machend.</p>
+        <span class="price">23,90 €</span>
+      </div>
+      <div class="menu-card">
+        <span class="menu-icon">🥓</span>
+        <h3>Baby Ribs</h3>
+        <p>Zarte Rippchen vom Schwäbisch-Hällischen Landschwein, serviert mit frischem Brot – ein Signature-Gericht des Hauses.</p>
+        <span class="price">16,80 €</span>
+      </div>
+      <div class="menu-card">
+        <span class="menu-icon">🍺</span>
+        <h3>Ayinger Bier vom Fass</h3>
+        <p>Frisch gezapftes Ayinger Kellerbier, Weißbier und saisonale Biere – das Herzstück jedes Wirts­haus­besuchs.</p>
+        <span class="price">ab 4,50 €</span>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:0.88rem;color:rgba(253,250,244,0.38);font-weight:300;">
+      Cocktails ab 4,90 € · Mittagsmenüs Mo–Fr 11:30–14:30 Uhr · Vollständige Karte vor Ort oder unter 089 7144651
+    </p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-inner">
+    <div class="features-header">
+      <span class="section-label">Was den Wöllinger ausmacht</span>
+      <h2 class="section-title">Echt <em>bayerisch</em></h2>
+      <div class="ornament">⸻ ✦ ⸻</div>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">🌳</span>
+        <h3>Biergarten</h3>
+        <p>Bis zu 200 Sitzplätze im Freien – ideal für gesellige Sommerabende und Familienfeiern.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎵</span>
+        <h3>Live-Musik</h3>
+        <p>Regelmäßige Abende mit Livemusik für unvergessliche Stimmung im echten Wirtshausambiente.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⚽</span>
+        <h3>Sportübertragungen</h3>
+        <p>Alle wichtigen Spiele auf großem Bildschirm – gemütlich mit Maßkrug auf der Hand.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🍳</span>
+        <h3>Sonntagsbrunch</h3>
+        <p>Großer Brunch jeden Sonntag und an Feiertagen von 10–16 Uhr für nur 17,90 €.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">👨‍👩‍👧</span>
+        <h3>Familienfreundlich</h3>
+        <p>Hochstühle, Kindermenüs und genügend Platz für die ganze Familie – der Wöllinger heißt alle willkommen.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">♿</span>
+        <h3>Barrierefrei</h3>
+        <p>Rollstuhlgerechter Zugang und großzügiger Parkplatz für einen angenehmen Besuch für alle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÖFFNUNGSZEITEN -->
+<section class="hours" id="hours">
+  <div class="hours-inner">
+    <div>
+      <span class="section-label">Wann wir offen haben</span>
+      <h2 class="section-title">Öffnungs<em>zeiten</em></h2>
+      <p class="section-text" style="margin-bottom:1.8rem;">Täglich geöffnet – kein Ruhetag! Kommen Sie vorbei, wir freuen uns auf Sie.</p>
+      <div class="hours-table">
+        <div class="hours-row" data-day="Montag">
+          <span class="day">Montag</span><span class="time">11:00 – 23:00 Uhr</span>
+        </div>
+        <div class="hours-row" data-day="Dienstag">
+          <span class="day">Dienstag</span><span class="time">11:00 – 23:00 Uhr</span>
+        </div>
+        <div class="hours-row" data-day="Mittwoch">
+          <span class="day">Mittwoch</span><span class="time">11:00 – 23:00 Uhr</span>
+        </div>
+        <div class="hours-row" data-day="Donnerstag">
+          <span class="day">Donnerstag</span><span class="time">11:00 – 23:00 Uhr</span>
+        </div>
+        <div class="hours-row" data-day="Freitag">
+          <span class="day">Freitag</span><span class="time">11:00 – 23:00 Uhr</span>
+        </div>
+        <div class="hours-row" data-day="Samstag">
+          <span class="day">Samstag</span><span class="time">10:00 – 23:00 Uhr</span>
+        </div>
+        <div class="hours-row" data-day="Sonntag">
+          <span class="day">Sonntag</span><span class="time">10:00 – 23:00 Uhr</span>
+        </div>
+      </div>
+      <div class="mittagstisch">
+        <h4>🍽 Mittagstisch</h4>
+        <p>Montag bis Freitag · 11:30 – 14:30 Uhr · wechselnde Tagesgerichte zu kleinen Preisen</p>
+      </div>
+      <div class="brunch-box">
+        <h4>🥞 Sonntagsbrunch &amp; Feiertage</h4>
+        <p>10:00 – 16:00 Uhr · Großes Brunch-Buffet für 17,90 € pro Person</p>
+      </div>
+    </div>
+    <div>
+      <span class="section-label">Anfahrt &amp; Infos</span>
+      <h2 class="section-title">Der <em>Wöllinger</em></h2>
+      <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:1.2rem;">
+        <div style="display:flex;gap:0.9rem;align-items:flex-start;">
+          <span style="color:var(--gold);font-size:1.1rem;margin-top:3px;">✦</span>
+          <div>
+            <strong style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.15rem;">U-Bahn</strong>
+            <span style="font-weight:300;font-size:1rem;">U6 Westpark – ca. 600 m Fußweg</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:0.9rem;align-items:flex-start;">
+          <span style="color:var(--gold);font-size:1.1rem;margin-top:3px;">✦</span>
+          <div>
+            <strong style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.15rem;">Parken</strong>
+            <span style="font-weight:300;font-size:1rem;">Großzügiger Parkplatz direkt am Haus vorhanden</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:0.9rem;align-items:flex-start;">
+          <span style="color:var(--gold);font-size:1.1rem;margin-top:3px;">✦</span>
+          <div>
+            <strong style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.15rem;">Kartenzahlung</strong>
+            <span style="font-weight:300;font-size:1rem;">Bargeldloses Bezahlen ist selbstverständlich möglich</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:0.9rem;align-items:flex-start;">
+          <span style="color:var(--gold);font-size:1.1rem;margin-top:3px;">✦</span>
+          <div>
+            <strong style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.15rem;">Take-away &amp; Lieferung</strong>
+            <span style="font-weight:300;font-size:1rem;">Essen zum Mitnehmen &amp; Lieferung via Uber Eats</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEWERTUNGEN -->
+<section class="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header">
+      <span class="section-label">Was unsere Gäste sagen</span>
+      <h2 class="section-title">Gäste<em>stimmen</em></h2>
+      <div class="rating-badge">★ 4.4 / 5 auf Google · 4.5 auf Restaurant Guru</div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„In diesem gemütlichen bayerischen Wirtshaus sind in allen Bereichen Profis am Werk. Das Preis-Leistungs-Verhältnis ist sehr gut. Das Essen ist ausgesprochen lecker und die Portionen sehr ordentlich."</p>
+        <span class="review-author">— Gast auf Restaurant Guru</span>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Schöner Biergarten! Freundliches Personal! Kinderfreundlich! Ein gediegenes Wirtshaus mit passendem Ambiente – hier fühlt man sich sofort wohl."</p>
+        <span class="review-author">— Gast auf OpenTable</span>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">„Waren gestern wieder im Wöllinger: Wir haben wirklich gut gegessen und auch das naturtrübe Kellerbier genossen. Service aufmerksam und nett, Speisekarte vielfältig. Wir freuen uns auf den Sommer!"</p>
+        <span class="review-author">— Gast auf TripAdvisor, 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVIERUNG -->
+<section class="reservation" id="reservation">
+  <div class="reservation-inner">
+    <span class="section-label">Online buchen</span>
+    <h2 class="section-title">Tisch <em>reservieren</em></h2>
+    <p class="section-text">Schicken Sie uns Ihre Anfrage – wir melden uns zur Bestätigung. Für größere Gruppen (7+) bitte direkt anrufen.</p>
+
+    <form class="res-form" id="resForm" onsubmit="submitReservation(event)">
+      <div class="form-group">
+        <label for="name">Ihr Name</label>
+        <input type="text" id="name" placeholder="Max Mustermann" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Telefon</label>
+        <input type="tel" id="phone" placeholder="+49 …" required>
+      </div>
+      <div class="form-group">
+        <label for="date">Datum</label>
+        <input type="date" id="date" required>
+      </div>
+      <div class="form-group">
+        <label for="time">Uhrzeit</label>
+        <select id="time" required>
+          <option value="">Bitte wählen</option>
+          <option>11:00</option><option>11:30</option>
+          <option>12:00</option><option>12:30</option>
+          <option>13:00</option><option>13:30</option>
+          <option>14:00</option>
+          <option>17:00</option><option>17:30</option>
+          <option>18:00</option><option>18:30</option>
+          <option>19:00</option><option>19:30</option>
+          <option>20:00</option><option>20:30</option>
+          <option>21:00</option><option>21:30</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="guests">Personen</label>
+        <select id="guests" required>
+          <option value="">Bitte wählen</option>
+          <option>1 Person</option><option>2 Personen</option>
+          <option>3 Personen</option><option>4 Personen</option>
+          <option>5 Personen</option><option>6 Personen</option>
+          <option>7+ (bitte anrufen)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="email">E-Mail (optional)</label>
+        <input type="email" id="email" placeholder="ihre@email.de">
+      </div>
+      <div class="form-group full">
+        <label for="notes">Anmerkungen</label>
+        <textarea id="notes" placeholder="Allergien, besondere Wünsche, Anlass …"></textarea>
+      </div>
+      <div class="form-group full" style="text-align:center;">
+        <button type="submit" class="btn-primary" style="width:100%;font-size:0.92rem;padding:1rem 2rem;">Reservierung anfragen</button>
+      </div>
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <h4>Vergelt's Gott für Ihre Anfrage!</h4>
+      <p>Wir melden uns baldmöglichst zur Bestätigung. Sie können uns auch direkt erreichen:<br><strong style="color:var(--gold-light);">089 7144651</strong></p>
+    </div>
+
+    <p class="form-note">Oder direkt anrufen: <a href="tel:+4989714651">089 7144651</a></p>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="map-section">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2661.5!2d11.5188!3d48.1108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e75b0a6b24a1f%3A0x0!2sJohann-Clanze-Stra%C3%9Fe+112%2C+81369+M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Wöllinger Wirtshaus München – Johann-Clanze-Straße 112">
+  </iframe>
+</div>
+
+<!-- KONTAKT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <span class="section-label">Finden Sie uns</span>
+      <h2 class="section-title">Kontakt &amp; <em>Anfahrt</em></h2>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>Adresse</strong>
+            <a href="https://maps.google.com/?q=Wöllinger+Wirtshaus+Johann-Clanze-Straße+112+München" target="_blank">
+              Johann-Clanze-Straße 112<br>81369 München – Sendling
+            </a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-item-text">
+            <strong>Telefon</strong>
+            <a href="tel:+4989714651">089 7144651</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌐</div>
+          <div class="contact-item-text">
+            <strong>Webseite</strong>
+            <a href="https://woellinger.de" target="_blank">woellinger.de</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-item-text">
+            <strong>Öffnungszeiten</strong>
+            <span style="color:var(--text-muted);font-weight:300;">Mo – Fr: 11:00 – 23:00 Uhr<br>Sa – So: 10:00 – 23:00 Uhr</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🚇</div>
+          <div class="contact-item-text">
+            <strong>ÖPNV</strong>
+            <span style="color:var(--text-muted);font-weight:300;">U6 Westpark · ca. 600 m Fußweg<br>Bus Partnachplatz</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://www.facebook.com/woellinger/" target="_blank" class="fb-link">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Auf Facebook folgen
+      </a>
+    </div>
+    <div class="contact-img">
+      <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&q=80" alt="Bayerisches Bier" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="diamond-border"></div>
+<footer>
+  <span class="footer-logo">Wöllinger</span>
+  <p>Johann-Clanze-Straße 112 · 81369 München · <a href="tel:+4989714651">089 7144651</a></p>
+  <p style="margin-top:0.4rem;">
+    <a href="https://www.facebook.com/woellinger/" target="_blank">Facebook</a>
+    &nbsp;·&nbsp;
+    <a href="https://woellinger.de" target="_blank">woellinger.de</a>
+  </p>
+  <p style="margin-top:0.6rem;font-size:0.75rem;opacity:0.6;">© 2025 Wöllinger Wirtshaus München</p>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  // Min date
+  const dateInput = document.getElementById('date');
+  dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+
+  // Highlight today
+  const dayNames = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  const todayName = dayNames[new Date().getDay()];
+  document.querySelectorAll('.hours-row').forEach(row => {
+    if (row.dataset.day === todayName) row.classList.add('today');
+  });
+
+  // Reservation
+  function submitReservation(e) {
+    e.preventDefault();
+    document.getElementById('resForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.menu-card,.review-card,.feature-card,.stat,.contact-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
